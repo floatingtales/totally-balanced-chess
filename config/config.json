@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "sho",
+    "password": null,
+    "database": "tb_chess",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
