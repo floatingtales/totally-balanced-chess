@@ -13,18 +13,20 @@ if (config.use_env_variable) {
 }
 
 const initUsersModel = require('./users');
-const initGameRoomsModel = require('./gameRoom');
+const initGamesModel = require('./games');
 
 db.users = initUsersModel(sequelize, Sequelize.DataTypes);
-db.gameRoom = initGameRoomsModel(sequelize, Sequelize.DataTypes);
+db.games = initGamesModel(sequelize, Sequelize.DataTypes);
 
-db.users.belongsToMany(db.users, { as: 'whitePlayer', foreignKey: 'white_player_id', through: db.gameRoom });
-db.users.belongsToMany(db.users, { as: 'blackPlayer', foreignKey: 'black_player_id', through: db.gameRoom });
+// many-to-many relationship between users table and users table, through games table
+db.users.belongsToMany(db.users, { as: 'whiteGame', foreignKey: 'white_player_id', through: db.games });
+db.users.belongsToMany(db.users, { as: 'blackGame', foreignKey: 'black_player_id', through: db.games });
 
-db.users.hasMany(db.gameRoom, { as: 'whitePlayer', foreignKey: 'white_player_id' });
-db.users.hasMany(db.gameRoom, { as: 'blackPlayer', foreignKey: 'black_player_id' });
-db.gameRoom.belongsTo(db.users);
-db.gameRoom.belongsTo(db.users);
+// defining two one-to-many relationship between users and games table
+db.users.hasMany(db.games, { as: 'whitePlayer', foreignKey: 'white_player_id' });
+db.users.hasMany(db.games, { as: 'blackPlayer', foreignKey: 'black_player_id' });
+db.games.belongsTo(db.users, { foreignKey: 'white_player_id' });
+db.games.belongsTo(db.users, { foreignKey: 'black_player_id' });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
