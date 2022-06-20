@@ -1,5 +1,7 @@
 const cookieParser = require('cookie-parser');
 const express = require('express');
+const favicon = require('serve-favicon');
+const path = require('path');
 
 // import models
 const db = require('./models/index');
@@ -19,18 +21,27 @@ const gamesController = new GamesController(db.gameRoom);
 // initialize routers
 const usersRouter = new UsersRouter(usersController).routes();
 const gamesRouter = new GamesRouter(gamesController).routes();
+const baseRouter = require('./routers/baseRouter');
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use(favicon(path.join('public', 'favicon.svg')));
 app.use(cookieParser());
 
 app.use('/users', usersRouter);
 app.use('/games', gamesRouter);
+app.use('/', baseRouter());
 
-const PORT = 3004;
+// 404 handler
+app.get('*', (req, res) => {
+  console.log(req.url);
+  res.status(404).render('not-found');
+});
+
+const PORT = 1111;
 app.listen(PORT, () => {
   console.log(`App is listening to port ${PORT}`);
 });

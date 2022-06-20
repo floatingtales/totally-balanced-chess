@@ -5,6 +5,11 @@ class UsersController extends BaseController {
     super(model);
     this.title = 'Users';
   }
+
+  getFoo(req, res) {
+    console.log(req.url);
+    res.json({ sent: 'foofoo', title: this.title });
+  }
 }
 
 module.exports = UsersController;
