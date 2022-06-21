@@ -11,10 +11,10 @@ do loggedIn sidebar here
   <div id="navbarSupportedContent" class="collapse navbar-collapse w-100 my-3">
     <ul class="navbar-nav w-100 d-flex flex-md-column text-center">
       <li>
-        <button class="nav-link btn btn-secondary my-1 w-100">Sign up!</button>
+        <button class="nav-link btn btn-secondary my-1 w-100" data-bs-toggle="modal" data-bs-target="#sign-up-modal">Sign up!</button>
       </li>
       <li>
-        <button class="nav-link btn btn-secondary my-1 w-100">Log in!</button>
+        <button class="nav-link btn btn-secondary my-1 w-100" data-bs-toggle="modal" data-bs-target="#log-in-modal">Log in!</button>
       </li>
       <li>
         <a href="#" class="nav-link btn btn-secondary my-1">Quickplay!</a>
@@ -22,4 +22,68 @@ do loggedIn sidebar here
     </ul>
   </div>
 </nav>
+
+<div class="modal fade" id="sign-up-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Sign up!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="email_signup">Email</label>
+          <input type="email" class="form-control" id="email_signup" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label for="username_signup">Username</label>
+          <input type="text" class="form-control" id="username_signup" placeholder="username">
+        </div>
+        <div class="form-group">
+          <label for="password_signup">Password</label>
+          <input type="password" class="form-control" id="password_signup" placeholder="password">
+        </div>
+      </div>
+      <div class="text-center">
+        Already registered? <button class="btn btn-link m-0 p-0 pb-1" style="font-size:1em; text-transform:none;" data-bs-target="#log-in-modal" data-bs-toggle="modal">Log in</button> instead!
+      </div>
+      <div id="error_text" class="text-danger text-center">
+        fubar
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="log-in-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Log in!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="username_login">Username</label>
+          <input type="text" class="form-control" id="username_login" placeholder="username">
+        </div>
+        <div class="form-group">
+          <label for="password_login">Password</label>
+          <input type="password" class="form-control" id="password_login" placeholder="password">
+        </div>
+      </div>
+      <div class="text-center">
+        Not registered? <button class="btn btn-link m-0 p-0 pb-1" style="font-size:1em; text-transform:none;" data-bs-target="#sign-up-modal" data-bs-toggle="modal">Sign up</button> instead!
+      </div>
+      <div id="error_text" class="text-danger text-center">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
 <% } %>

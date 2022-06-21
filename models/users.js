@@ -7,6 +7,11 @@ const initUsersModel = (sequelize, DataTypes) => sequelize.define(
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
+    email: {
+      allowNull: false,
+      unique: true,
+      type: DataTypes.STRING,
+    },
     username: {
       allowNull: false,
       unique: true,
