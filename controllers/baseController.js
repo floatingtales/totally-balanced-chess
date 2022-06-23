@@ -19,6 +19,22 @@ class BaseController {
     res.json(frontendData);
   }
 
+  async getOne(req, res) {
+    const conditions = { ...req.data };
+    console.log(conditions);
+    let results;
+    try {
+      results = await this.model.findOne({
+        where: conditions,
+      });
+      if (!results.length) { throw new Error('nothing found'); }
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(false);
+    }
+    res.json(results);
+  }
+
   async getOneByParam(req, res) {
     const params = { ...req.params };
     let frontendData;

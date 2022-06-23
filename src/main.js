@@ -1,19 +1,72 @@
-const axios = require('axios');
+import axios from 'axios';
+import $ from 'jquery';
 
-console.log('foobar');
+$('#loginBtn').on('click', async () => {
+  // on login btn click
+  $('#loginBtn').html('');
+  $('#loginBtn').append($('<span />').addClass('spinner-border spinner-border-sm')).append(' Loading...');
 
-const testAxios = async () => {
-  const axiosJson = await axios.get('/users/foo');
-  console.log(axiosJson);
-};
+  const username = $('#username_login').val();
+  const password = $('#password_login').val();
+  let userPresent;
 
-const arrFunc = async () => {
-  const obj = { a: 'first', b: 'second' };
+  try {
+    userPresent = await axios.get(`/users/byusername/${username}`);
+  } catch (err) {
+    console.log(err);
+  }
 
-  const newObj = { ...obj, c: 'third' };
+  $('#loginBtn').html('log in!');
 
-  console.log(newObj);
-  await testAxios();
-};
+  if (!userPresent) {
+    // if user not present show error
 
-arrFunc();
+    $('#error_text_login').append($('<div />').addClass('alert alert-warning text-center').text('username not found'));
+
+    setTimeout(() => {
+      $('.alert').addClass('fade');
+      setTimeout(() => {
+        $('.alert').remove();
+      }, 1000);
+    }, 2000);
+  } else {
+    // if user present
+    console.log(userPresent);
+  }
+});
+
+$('#signupBtn').on('click', async () => {
+  // on signup button click
+  $('#signupBtn').html('');
+  $('#signupBtn').append($('<span />').addClass('spinner-border spinner-border-sm')).append(' Loading...');
+
+  const email = $('#email_signup').val();
+  const username = $('#username_signup').val();
+  const password = $('#password_signup').val();
+  let userPresent;
+
+  try {
+    userPresent = await axios.get(`/users/byemail/${email}`);
+  } catch (err) {
+    console.log(err);
+  }
+
+  $('#signupBtn').html('log in!');
+
+  if (userPresent) {
+    $('#error_text_signup').append($('<div />').addClass('alert alert-warning text-center').text('email already in use!'));
+    setTimeout(() => {
+      $('.alert').addClass('fade');
+      setTimeout(() => {
+        $('.alert').remove();
+      }, 1000);
+    }, 2000);
+    return;
+  }
+
+  try {
+    userPresent = await axios.get(`/users/byusername/${username}`);
+  } catch (err) {
+    console.log(err);
+  }
+});

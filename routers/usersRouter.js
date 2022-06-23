@@ -13,7 +13,9 @@ class UsersRouter {
 
     /* axios routes */
     router.get('/', this.controller.getAll.bind(this.controller));
-    router.get('/:id', this.controller.getOneByParam.bind(this.controller));
+    router.get('/byemail/:email', this.controller.getOneByParam.bind(this.controller));
+    router.get('/byusername/:username', this.controller.getOneByParam.bind(this.controller));
+    router.get('/byid/:id', this.controller.getOneByParam.bind(this.controller));
 
     return router;
   }
