@@ -5,6 +5,11 @@ class GamesController extends BaseController {
     super(model);
     this.title = 'Games';
   }
+
+  quickplay(req, res) {
+    console.log(req.url);
+    res.render('quickplay');
+  }
 }
 
 module.exports = GamesController;

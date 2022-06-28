@@ -9,7 +9,11 @@ const initGamesModel = (sequelize, DataTypes) => sequelize.define(
     },
     startingPGN: {
       allowNull: false,
-      type: DataTypes.JSON,
+      type: DataTypes.STRING,
+    },
+    currentPGN: {
+      allowNull: false,
+      type: DataTypes.STRING,
     },
     gameResult: {
       type: DataTypes.STRING,

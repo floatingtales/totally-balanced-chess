@@ -8,14 +8,14 @@ class UsersRouter {
   }
 
   routes() {
-    /* axios test route */
-    router.get('/foo', this.controller.getFoo.bind(this.controller));
-
     /* axios routes */
-    router.get('/', this.controller.getAll.bind(this.controller));
-    router.get('/byemail/:email', this.controller.getOneByParam.bind(this.controller));
-    router.get('/byusername/:username', this.controller.getOneByParam.bind(this.controller));
-    router.get('/byid/:id', this.controller.getOneByParam.bind(this.controller));
+    router.put('/login', this.controller.login.bind(this.controller));
+    router.post('/signup', this.controller.signUp.bind(this.controller));
+    router.put('/logout', this.controller.logout.bind(this.controller));
+
+    /* normal routes, logged in gated */
+    router.use(this.controller.isLoggedIn.bind(this.controller));
+    router.get('/', this.controller.renderUser.bind(this.controller));
 
     return router;
   }

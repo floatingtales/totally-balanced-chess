@@ -25,7 +25,11 @@ module.exports = {
       },
       starting_PGN: {
         allowNull: false,
-        type: Sequelize.JSON,
+        type: Sequelize.STRING,
+      },
+      current_PGN: {
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       game_result: {
         type: Sequelize.STRING,

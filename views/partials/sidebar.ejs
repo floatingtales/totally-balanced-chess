@@ -1,9 +1,6 @@
-<% if (false) { %>
-do loggedIn sidebar here
-<% } else { %>
 <nav class="navbar navbar-expand-md navbar-dark d-flex flex-md-column">
-  <a href="./">
-    <img src="favicon.svg" alt="logo" width="200px" />
+  <a href="/">
+    <img src="/favicon.svg" alt="logo" width="200px" />
   </a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
     <span class="navbar-toggler-icon"></span>
@@ -17,7 +14,7 @@ do loggedIn sidebar here
         <button class="nav-link btn btn-secondary my-1 w-100" data-bs-toggle="modal" data-bs-target="#log-in-modal">Log in!</button>
       </li>
       <li>
-        <a href="#" class="nav-link btn btn-secondary my-1">Quickplay!</a>
+        <a href="/games/quickplay" class="nav-link btn btn-secondary my-1">Quickplay!</a>
       </li>
     </ul>
   </div>
@@ -47,8 +44,7 @@ do loggedIn sidebar here
       <div class="text-center">
         Already registered? <button class="btn btn-link m-0 p-0 pb-1" style="font-size:1em; text-transform:none;" data-bs-target="#log-in-modal" data-bs-toggle="modal">Log in</button> instead!
       </div>
-      <div id="error_text_signup" class="text-danger text-center">
-        fubar
+      <div id="error_text_signup">
       </div>
       <div class="modal-footer">
         <button type="button" id="signupBtn" class="btn btn-primary">Sign up!</button>
@@ -86,4 +82,3 @@ do loggedIn sidebar here
     </div>
   </div>
 </div>
-<% } %>
