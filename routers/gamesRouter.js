@@ -9,7 +9,7 @@ class GamesRouter {
 
   routes() {
     /* axios routes */
-    router.get('/', this.controller.getAll.bind(this.controller));
+    router.get('/createBoard', this.controller.createFen.bind(this.controller));
 
     /* normal routes */
     router.get('/quickplay', this.controller.quickplay.bind(this.controller));

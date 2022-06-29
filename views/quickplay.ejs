@@ -5,15 +5,20 @@
 <body>
   <div class="container d-flex flex-column flex-md-row bg-dark min-vh-100">
     <%- include('./partials/sidebar') %>
+    <div class="container d-flex flex-column align-items-center justify-content-center">
+      <div class="h1">Quickplay!</div>
+      <div id="gameBoard" class="text-center"></div>
+      <p>This is a pass-and-play game, play in a room together idk</p>
+      <p>Yes, this is totally balanced</p>
+      <p id="info">White to start</p>
+    </div>
   </div>
-  <div id="gameBoard"></div>
 
-  <div id="board2" style="width: 400px"></div>
-  <button id="startBtn">Start Position</button>
-  <button id="clearBtn">Clear Board</button>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js" integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/js/chess.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js" integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD" crossorigin="anonymous"></script>
+  <script src="/js/main.js"></script>
   <script src="/js/games.js"></script>
 
 </body>

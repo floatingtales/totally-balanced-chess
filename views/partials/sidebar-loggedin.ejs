@@ -11,12 +11,32 @@
         <a href="/games/quickplay" class="nav-link btn btn-secondary my-1">Quickplay!</a>
       </li>
       <li>
-        <button class="nav-link btn btn-secondary my-1 w-100">Pair up!</button>
+        <button class="nav-link btn btn-secondary my-1 w-100" data-bs-toggle="modal" data-bs-target="#pair-up-modal">Pair Up!</button>
       </li>
       <li>
         <button class="nav-link btn btn-secondary my-1 w-100" id="logoutBtn">Log out!</button>
       </li>
-
     </ul>
   </div>
 </nav>
+
+<div class="modal fade" id="pair-up-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Pair up!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="username_signup">Username</label>
+          <input type="text" class="form-control" id="username_signup" placeholder="username">
+        </div>
+        <div id="error_text_pairup"> </div>
+        <div class="modal-footer">
+          <button type="button" id="pairupBtn" class="btn btn-primary">Pair up!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
