@@ -7,11 +7,11 @@ const initGamesModel = (sequelize, DataTypes) => sequelize.define(
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    startingPGN: {
+    startingFen: {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    currentPGN: {
+    currentFen: {
       allowNull: false,
       type: DataTypes.STRING,
     },

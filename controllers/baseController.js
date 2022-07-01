@@ -20,19 +20,19 @@ class BaseController {
   }
 
   async getOne(req, res) {
-    const conditions = { ...req.data };
+    const conditions = { ...req.body };
     console.log(conditions);
     let results;
     try {
       results = await this.model.findOne({
         where: conditions,
       });
-      if (!results.length) { throw new Error('nothing found'); }
+      if (results === null) { throw new Error('nothing found'); }
     } catch (err) {
       console.log(err);
-      res.status(500).json(false);
+      return res.status(500).json({ status: 'not found' });
     }
-    res.json(results);
+    return res.json({ status: 'found', results });
   }
 
   async getOneByParam(req, res) {

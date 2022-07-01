@@ -12,6 +12,8 @@ class UsersRouter {
     router.put('/login', this.controller.login.bind(this.controller));
     router.post('/signup', this.controller.signUp.bind(this.controller));
     router.put('/logout', this.controller.logout.bind(this.controller));
+    router.get('/userGames', this.controller.findGames.bind(this.controller));
+    router.put('/findUser', this.controller.getOne.bind(this.controller));
 
     /* normal routes, logged in gated */
     router.use(this.controller.isLoggedIn.bind(this.controller));

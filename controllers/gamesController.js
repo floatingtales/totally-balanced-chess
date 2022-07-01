@@ -1,14 +1,22 @@
+/* eslint-disable class-methods-use-this */
 const BaseController = require('./baseController');
 
 class GamesController extends BaseController {
-  constructor(model) {
+  constructor(model, db) {
     super(model);
-    this.title = 'Games';
+    this.users = db.users;
   }
 
   quickplay(req, res) {
     console.log(req.url);
     res.render('quickplay');
+  }
+
+  displayGame(req, res) {
+    console.log(req.url);
+    const { id } = req.params;
+    const { loggedUser } = req.cookies;
+    res.render('pairplay', { id, userId: loggedUser });
   }
 
   createFen(req, res) {
@@ -35,7 +43,62 @@ class GamesController extends BaseController {
     const chessboardFen = `${blackFenString}/8/8/8/8/${whiteFenString}`;
     const chessjsFen = `${chessboardFen} w - - 0 1`;
 
-    res.json({ chessboardFen, chessjsFen });
+    res.json({ chessjsFen });
+  }
+
+  async createGame(req, res) {
+    console.log(req.url);
+    const { id, chessjsFen } = req.body;
+    let game;
+    try {
+      if (Number(id) === Number(req.cookies.loggedUser)) {
+        throw new Error('same id');
+      }
+      game = await this.model.create({
+        white_player_id: id,
+        black_player_id: req.cookies.loggedUser,
+        startingFen: chessjsFen,
+        currentFen: chessjsFen,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ status: 'id is same' });
+    }
+    return res.json({ status: 'success', game });
+  }
+
+  async getBoard(req, res) {
+    console.log(req.url);
+    let gameState;
+    try {
+      gameState = await this.model.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ status: 'error loading gameState' });
+    }
+    return res.json({ status: 'game loaded', gameState });
+  }
+
+  async updateBoard(req, res) {
+    console.log(req.url);
+    let gameState;
+    try {
+      gameState = await this.model.update({
+        currentFen: req.body.currentFen,
+      }, {
+        where: {
+          id: req.params.id,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ status: 'error saving gameState' });
+    }
+    return res.json({ status: 'game saved', gameState });
   }
 }
 

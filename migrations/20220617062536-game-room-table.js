@@ -23,11 +23,11 @@ module.exports = {
           key: 'id',
         },
       },
-      starting_PGN: {
+      starting_fen: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      current_PGN: {
+      current_fen: {
         allowNull: false,
         type: Sequelize.STRING,
       },

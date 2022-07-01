@@ -2,11 +2,16 @@
 let board;
 
 const initGame = async () => {
-  const createBoard = await axios.get('/games/createBoard');
-  const { chessboardFen } = createBoard.data;
+  let createBoard;
+  try {
+    createBoard = await axios.get('/games/createBoard');
+  } catch (err) {
+    console.log(err);
+  }
+  const { chessjsFen } = createBoard.data;
   const cfg = {
     pieceTheme: '../img/chesspieces/wikipedia/{piece}.png',
-    position: chessboardFen,
+    position: chessjsFen.split(' ')[0],
   };
   board = new ChessBoard('gameBoard', cfg);
 };

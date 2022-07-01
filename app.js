@@ -3,6 +3,11 @@ const express = require('express');
 const favicon = require('serve-favicon');
 const path = require('path');
 
+const app = express();
+
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
 // import models
 const db = require('./models/index');
 
@@ -15,15 +20,14 @@ const UsersRouter = require('./routers/usersRouter');
 const GamesRouter = require('./routers/gamesRouter');
 
 // initialize controllers
-const usersController = new UsersController(db.users);
-const gamesController = new GamesController(db.gameRoom);
+const usersController = new UsersController(db.users, db);
+const gamesController = new GamesController(db.games, db);
 
 // initialize routers
 const usersRouter = new UsersRouter(usersController).routes();
 const gamesRouter = new GamesRouter(gamesController).routes();
 const baseRouter = require('./routers/baseRouter');
 
-const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');

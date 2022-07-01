@@ -4,9 +4,9 @@ const bcrypt = require('bcryptjs');
 const BaseController = require('./baseController');
 
 class UsersController extends BaseController {
-  constructor(model) {
+  constructor(model, db) {
     super(model);
-    this.title = 'Users';
+    this.games = db.games;
   }
 
   async login(req, res) {
@@ -69,6 +69,30 @@ class UsersController extends BaseController {
     res.json({ status: 'logout success' });
   }
 
+  async findGames(req, res) {
+    let whiteGames;
+    let blackGames;
+    try {
+      whiteGames = await this.games.findAll({
+        where: {
+          white_player_id: req.cookies.loggedUser,
+        },
+      });
+      blackGames = await this.games.findAll({
+        where: {
+          black_player_id: req.cookies.loggedUser,
+        },
+      });
+      if (whiteGames.length === 0 && blackGames.length === 0) {
+        throw new Error('no games found');
+      }
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ status: 'noGameFound' });
+    }
+    return res.json({ status: 'gamesFound', whiteGames, blackGames });
+  }
+
   isLoggedIn(req, res, next) {
     console.log('login check');
     if (!req.cookies.loggedUser) {
@@ -77,7 +101,7 @@ class UsersController extends BaseController {
     return next();
   }
 
-  renderUser(req, res) {
+  async renderUser(req, res) {
     console.log(req.url);
     return res.render('user');
   }
